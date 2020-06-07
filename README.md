@@ -76,6 +76,7 @@
 
 ## Resources
 - [HTTP Status Code](https://www.ietf.org/assignments/http-status-codes/http-status-codes.xml)
+- [400 vs 422](https://tools.ietf.org/html/rfc4918#section-11.2)
 
 ## References
 + [Keep Alive](https://www.imperva.com/learn/performance/http-keep-alive/)

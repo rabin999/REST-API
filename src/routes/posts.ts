@@ -1,4 +1,4 @@
-import { Router, Request, Response } from "express";
+import { Router, Request, Response, NextFunction } from "express";
 import { PostV1 } from "../post/v1/post"
 import { PostV2 } from "../post/v2/post";
 
