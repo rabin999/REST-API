@@ -1,4 +1,4 @@
-import { Request } from "express";
+import { Request, Response } from "express";
 import PostV1Data from "../../data/postv1_data";
 import PostDTO from "../../interfaces/post"
 
@@ -6,7 +6,9 @@ export namespace PostV1 {
 
     /**
      * Find Post by Post ID
+     * 
      * @param  {} id
+     * @param  {} includeResult=true
      * @returns PostDTO
      */
     function findById(id, includeResult = true) : PostDTO | Boolean {
@@ -25,10 +27,10 @@ export namespace PostV1 {
     /**
      * Fetch all Posts
      * 
-     * @param  {any} request
-     * @param  {any} response
+     * @param  {Request} request
+     * @param  {Response} response
      */
-    export function all(request: any, response: any) {
+    export function all(request: Request, response: Response) {
         console.log(`[${request.method}] all Posts`);
 
         response.send({
@@ -40,9 +42,9 @@ export namespace PostV1 {
      * Get Post detail
      * 
      * @param  {Request} request
-     * @param  {any} response
+     * @param  {Response} response
      */
-    export function detail(request: Request, response: any) {
+    export function detail(request: Request, response: Response) {
         let id: number = parseInt(request.params.id, 10);
         let post = findById(id);
         
@@ -61,9 +63,9 @@ export namespace PostV1 {
      * Create a new Post
      * 
      * @param  {Request} request
-     * @param  {any} response
+     * @param  {Response} response
      */
-    export function create(request: Request, response: any) {
+    export function create(request: Request, response: Response) {
         const body = request.body
         const id: number = parseInt(body.id, 10);
         const conflictedPost = findById(id, false);
@@ -90,9 +92,9 @@ export namespace PostV1 {
      * https://www.restapitutorial.com/lessons/httpmethods.html
      * 
      * @param  {Request} request
-     * @param  {any} response
+     * @param  {Response} response
      */
-    export function updateField(request: Request, response: any) {
+    export function updateField(request: Request, response: Response) {
         let id: number = parseInt(request.params.id, 10);
         console.log(`[${request.method}] modifing Post fields`);
 
@@ -121,9 +123,9 @@ export namespace PostV1 {
      * https://www.restapitutorial.com/lessons/httpmethods.html
      * 
      * @param  {Request} request
-     * @param  {any} response
+     * @param  {Response} response
      */
-    export function update(request: Request, response: any) {
+    export function update(request: Request, response: Response) {
         let id: number = parseInt(request.params.id, 10);
         console.log(`[${request.method}] replacing Post fields`);
         const requiredFields = ["userId", "id", "title", "body"];
@@ -142,7 +144,7 @@ export namespace PostV1 {
         }
 
         response.send({
-            data: {...post, ...request.body }
+            data: request.body
         });
     }
     
@@ -150,9 +152,9 @@ export namespace PostV1 {
      * Remove post
      * 
      * @param  {Request} request
-     * @param  {any} response
+     * @param  {Response} response
      */
-    export function remove(request: Request, response: any) {
+    export function remove(request: Request, response: Response) {
         let id: number = parseInt(request.params.id, 10);
         let post = findById(id);
         
